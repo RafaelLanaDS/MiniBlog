@@ -5,16 +5,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Abaut from './pages/Abaut/Abaut'
 
+// Components
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="container">
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/abaut' element={<Abaut />} />
-          </Routes>
-        </div>
+        <NavBar />
+          <div className="container">
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/abaut' element={<Abaut />} />
+            </Routes>
+          </div>
+        <Footer />
       </BrowserRouter>
     </div>
   )
