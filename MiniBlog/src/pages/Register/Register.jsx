@@ -1,3 +1,4 @@
+import { useAuthentication } from "../../hooks/useAuthentication"
 import styles from "./Register.module.css"
 import { useState, useEffect } from "react"
 
@@ -7,8 +8,10 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
+
+  const {createUser, error: authError, loading} = useAuthentication()
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     setError("")
@@ -24,8 +27,16 @@ const Register = () => {
       return
     }
 
+    const res = await createUser(user)
+
     console.log(user)
   }
+
+  useEffect(() =>{
+    if(authError){
+      setError[authError]
+    }
+  }, [authError])
 
   return (
     <div className={styles.register}>
