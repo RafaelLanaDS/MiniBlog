@@ -32,9 +32,9 @@ const Register = () => {
     console.log(user)
   }
 
-  useEffect(() =>{
-    if(authError){
-      setError[authError]
+  useEffect(() => {
+    if (authError) {
+      setError(authError)
     }
   }, [authError])
 
@@ -75,7 +75,8 @@ const Register = () => {
           placeholder="Confirme a sua senha" 
           value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
         </label>
-        <button className="btn">Cadastrar</button>
+        {!loading && <button className="btn">Cadastrar</button>}
+        {loading && <button className="btn" disabled>agurde...</button>}
         {error && <p className="error">{error}</p>}
       </form>
     </div>

@@ -25,14 +25,14 @@ export const useAuthentication = () => {
         }
     }
 
-    const creatUser = async (data) => {
+    const createUser = async (data) => {
         checkIfIsCancelled()
 
         setLoading(true)
         setError(null)
 
         try {
-            const {user} = createUserWithEmailAndPassword(
+            const { user } = await createUserWithEmailAndPassword(
                 auth,
                 data.email,
                 data.password
@@ -41,6 +41,8 @@ export const useAuthentication = () => {
             await updateProfile(user, {
                 displayName: data.displayName
             })
+
+            setLoading(false)
 
             return user
 
@@ -59,10 +61,12 @@ export const useAuthentication = () => {
                 systemErrorMessage = "Ocorreu um erro tente mais tarde"
             }
 
-            setError(systemErrorMessage)
-        }
+            setLoading(false)
 
-        setLoading(false)
+            setError(systemErrorMessage)
+        } finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -71,7 +75,7 @@ export const useAuthentication = () => {
 
     return {
         auth,
-        creatUser,
+        createUser,
         error,
         loading
     }
