@@ -35,7 +35,17 @@ function App() {
   }, [auth])
 
   if(loadingUser){
-    return<p>carregando...</p>
+    return (
+      <div className='loadingScreen'>
+        <p className='Loading' aria-label='carregando'>
+          {['c','a','r','r','e','g','a','n','d','o','.','.','.'].map((letter, index) => (
+            <span key={index} style={{ '--delay': `${index * 0.08}s` }}>
+              {letter}
+            </span>
+          ))}
+        </p>
+      </div>
+    )
   }
 
   return (
