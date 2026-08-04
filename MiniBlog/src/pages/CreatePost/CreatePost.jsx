@@ -21,18 +21,30 @@ const CreatePost = () => {
     e.preventDefault()
     setFormError("")
 
-    if (!user) {
-      setFormError("Você precisa estar autenticado para criar um post.")
+    // validade da imagem
+    try {
+      new URL(image)
+    } catch (error) {
+      setFormError("A imagem precisa ser uma URL.")
       return
     }
 
+    if (formError) return;
+
+    // criar o array de tags
     const tagsArray = tags
       .split(",")
-      .map((tag) => tag.trim())
+      .map((tag) => tag.trim().toLowerCase())
       .filter(Boolean)
 
+    // checar todos os valores 
     if (!title || !image || !body || tagsArray.length === 0) {
       setFormError("Por favor, preencha todos os campos.")
+      return
+    }
+
+    if (!user) {
+      setFormError("Você precisa estar autenticado para criar um post.")
       return
     }
 
@@ -40,7 +52,7 @@ const CreatePost = () => {
       title,
       image,
       body,
-      tags: tagsArray,
+      tagsArray,
       uid: user.uid,
       createdBy: user.displayName || "Usuário"
     })
@@ -73,6 +85,7 @@ const CreatePost = () => {
         {!response.loading && <button className="btn">Cadastrar</button>}
         {response.loading && <button className="btn" disabled>agurde...</button>}
         {response.error && <p className="error">{response.error}</p>}
+        {formError.error && <p className="error">{formError}</p>}
       </form>
     </div>
   )
