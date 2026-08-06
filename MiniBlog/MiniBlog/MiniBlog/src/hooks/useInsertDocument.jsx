@@ -41,7 +41,11 @@ export const useInsertDocument = (docCollection) => {
 
         try {
 
-            const newDocument = {...document, createAt: Timestamp.now()}
+            const newDocument = {
+                ...document,
+                tags: Array.isArray(document.tags) ? document.tags : document.tagsArray || [],
+                createdAt: Timestamp.now(),
+            }
 
             const insertedDocument = await addDoc (
                 collection(db, docCollection),
