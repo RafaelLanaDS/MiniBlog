@@ -9,9 +9,14 @@ import PostDetail from '../../components/PostDetail'
 const Home = () => {
   const [query, setQuery] = useState("")
   const {documents: post, loading} = useFetchDocuments("posts")
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    if(query){
+      return navigate(`/search?q=${query}`)
+    }
   }
 
   return (
