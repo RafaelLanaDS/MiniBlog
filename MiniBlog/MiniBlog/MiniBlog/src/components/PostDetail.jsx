@@ -1,22 +1,26 @@
-import styles from './PostDetail.module.css'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+
+import styles from "./PostDetail.module.css";
 
 const PostDetail = ({ post }) => {
   return (
-    <div className={styles.postCard}>
-      <img className={styles.postImage} src={post.image} alt={post.title} />
-      <div className={styles.postContent}>
-        <h2 className={styles.postTitle}>{post.title}</h2>
-        <p className={styles.postAuthor}>{post.createdBy}</p>
-        <div className={styles.postTags}>
-          {post.tags?.map((tag) => (
-            <p className={styles.postTag} key={tag}><span>#</span>{tag}</p>
-          ))}
-        </div>
-        <Link to={`/post/${post.id}`} className={`${styles.postLink} btn btn-outline`}>Ler</Link>
+    <div className={styles.post_detail}>
+      <img src={post.image} alt={post.title} />
+      <h2>{post.title}</h2>
+      <p className={styles.createdby}>por: {post.createdBy}</p>
+      <div className={styles.tags}>
+        {post.tags.map((tag) => (
+          <p key={tag}>
+            <span>#</span>
+            {tag}
+          </p>
+        ))}
       </div>
+      <Link to={`/posts/${post.id}`} className="btn btn-outline">
+        Ler
+      </Link>
     </div>
-  )
-}
+  );
+};
 
-export default PostDetail
+export default PostDetail;
