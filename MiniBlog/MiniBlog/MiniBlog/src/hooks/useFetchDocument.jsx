@@ -8,7 +8,7 @@ import {
 export const useFetchDocument = (docCollection, id) => {
   const [document, setDocument] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // deal with memory leak
   const [cancelled, setCancelled] = useState(false);
@@ -19,25 +19,29 @@ export const useFetchDocument = (docCollection, id) => {
         return;
       }
 
+      setLoading(true);
+      setError(null);
+
       try {
+        const docRef = doc(db, docCollection, id);
+        const docSnap = await getDoc(docRef);
 
-        const docRef = await doc(db,docCollection, id)
-        const docSnap = await getDoc(docRef)
-        setDocument(docSnap.data())
-        setLoading(false)
+        if (docSnap.exists()) {
+          setDocument({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setDocument(null);
+        }
 
+        setLoading(false);
       } catch (error) {
-        console.log(error)
-        setError(error.message)
-        setLoading(true)
+        console.log(error);
+        setError(error.message);
+        setLoading(false);
       }
-
     }
 
     loadDocument();
   }, [docCollection, id, cancelled]);
-
-  console.log(document);
 
   useEffect(() => {
     return () => setCancelled(true);

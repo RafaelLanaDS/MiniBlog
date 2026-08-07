@@ -6,16 +6,18 @@ import { useFetchDocument } from '../../hooks/useFetchDocument'
 
 const Post = () => {
     const {id} = useParams()
-    const {document: post} = useFetchDocument("post" , id )
-  return (
-    <div>
-      {post && (
-        <>
-            <h1>{post.title}</h1>
-        </>
-      )}
-    </div>
-  )
+    const {document: post, loading} = useFetchDocument("posts", id)
+
+    return (
+        <div>
+            {loading && <p>Carregando Post...</p>}
+            {post && (
+                <>
+                    <h1>{post.title}</h1>
+                </>
+            )}
+        </div>
+    )
 }
 
 export default Post
