@@ -41,6 +41,12 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             where("uid", "==", uid),
             orderBy("createdAt", "desc")
           );
+        } else if (uid) {
+          q = query(
+            collectionRef,
+            where("uid", "==", uid),
+            orderBy("createdAt", "desc")
+          );
         } else {
           q = query(collectionRef, orderBy("createdAt", "desc"));
         }
@@ -64,7 +70,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     }
 
     loadData();
-  }, [docCollection, documents, search, uid, cancelled]);
+  }, [docCollection, search, uid, cancelled]);
 
   console.log(documents);
 

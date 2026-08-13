@@ -8,26 +8,31 @@ import { useFetchDocuments } from '../../hooks/useFetchDocuments'
 
 const Dashboard = () => {
 
-  const {user} = useAuthValue()
-  const uid = user.uid
+  const { user } = useAuthValue()
+  const uid = user?.uid
 
-  //user post
-  const posts = []
+  const { documents: posts, loading } = useFetchDocuments("posts", null, uid)
 
   return (
     <div>
       <h2>Dashboard</h2>
       <p>Gerencie seus post</p>
-      {posts && posts.length ===  0 ? (
+      {loading && <p>Carregando posts...</p>}
+
+      {!loading && posts && posts.length === 0 ? (
         <div className={styles.noposts}>
           <p>Não foram encontrados posts</p>
           <Link to='/post/create' className='btn'>Criar primeiro post</Link>
         </div>
       ) : (
-        <div>
-          <p>Tem posts !!</p>
-        </div>
-      ) }
+        posts && (
+          <div>
+            {posts.map((post) => (
+              <h3 key={post.id}>{post.title}</h3>
+            ))}
+          </div>
+        )
+      )}
     </div>
   )
 }
