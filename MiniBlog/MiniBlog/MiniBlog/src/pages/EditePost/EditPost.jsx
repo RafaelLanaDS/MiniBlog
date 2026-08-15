@@ -103,7 +103,7 @@ const editePost = () => {
               <input type="text" name="Tags" id="" required placeholder='Insira suas Tags separadas por vírgula' onChange={(e) => setTags(e.target.value)} value={tags} />
             </label>
             {formError && <p className="error">{formError}</p>}
-            {!response.loading && <button className="btn">Cadastrar</button>}
+            {!response.loading && <button className="btn">Editar</button>}
             {response.loading && <button className="btn" disabled>agurde...</button>}
             {response.error && <p className="error">{response.error}</p>}
             {formError.error && <p className="error">{formError}</p>}
