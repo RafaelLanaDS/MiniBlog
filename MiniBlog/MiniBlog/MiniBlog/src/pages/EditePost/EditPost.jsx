@@ -3,7 +3,7 @@ import styles from './EditePost.module.css'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthValue } from '../../context/AuthContext'
-import { useInsertDocument } from '../../hooks/useInsertDocument'
+import { useUpdateDocument } from '../../hooks/useUpadateDocument' 
 import { useFetchDocument } from "../../hooks/useFetchDocument";
 
 const editePost = () => {
@@ -32,7 +32,7 @@ const editePost = () => {
   const { user } = useAuthValue()
   const navigate = useNavigate()
 
-  const { insertDocument, response } = useInsertDocument("posts")
+  const { updateDocument  , response } = useUpdateDocument("posts")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -65,16 +65,18 @@ const editePost = () => {
       return
     }
 
-    await insertDocument({
+    const data = {
       title,
       image,
       body,
       tags: tagsArray,
       uid: user.uid,
       createdBy: user.displayName || "Usuário"
-    })
+    }
 
-    navigate("/")
+    updateDocument (id, data)
+
+    navigate("/dashboard")
   }
 
   return (
