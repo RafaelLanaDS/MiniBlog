@@ -1,0 +1,23 @@
+.editePost{
+    text-align: center;
+}
+
+.editePost h2 {
+    font-size: 2.2rem;
+}
+
+.editePost p{
+    color: #aaa;
+    margin-bottom: 2rem;
+}
+
+.editePost .previewTitle {
+    margin-bottom: 2rem;
+    color: black;
+    font-weight: bold;
+}
+
+.editePost .imagePreview {
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
