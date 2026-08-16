@@ -1,8 +1,26 @@
-.footer{
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #edf3f6;
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 160px;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--secondary-900), var(--secondary-800));
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+.footer h3 {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
 }

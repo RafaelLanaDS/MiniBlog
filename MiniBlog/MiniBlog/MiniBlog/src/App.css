@@ -1,6 +1,12 @@
-.container{
+.App {
+  min-height: 100vh;
+}
+
+.container {
+  width: min(var(--container-width), calc(100% - 2rem));
   min-height: 60vh;
-  margin-bottom: 5em;
+  margin: 0 auto 5rem;
+  padding: 2rem 0 1rem;
 }
 
 .loadingScreen {
@@ -8,16 +14,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f7f7f7;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(245, 158, 11, 0.12));
 }
 
 .Loading {
   display: flex;
   gap: 0.2rem;
-  font-size: 2rem;
-  font-weight: 600;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
   letter-spacing: 0.2rem;
-  color: #333;
+  color: var(--text-strong);
+  text-transform: lowercase;
 }
 
 .Loading span {
@@ -30,10 +39,17 @@
   0%,
   100% {
     transform: translateY(0);
-    opacity: 0.7;
+    opacity: 0.75;
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: min(var(--container-width), calc(100% - 1.25rem));
+    padding-top: 1.25rem;
   }
 }
